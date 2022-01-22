@@ -1,5 +1,5 @@
 import express, { Application, Request, Response } from 'express'
-import morgan from 'morgan'
+// import morgan from 'morgan'
 import * as dotenv from 'dotenv'
 import requestLog from './middlewares/requestLog/requestLogger'
 import api from './api/api.router'
