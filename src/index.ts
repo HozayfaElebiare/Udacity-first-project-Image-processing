@@ -20,7 +20,7 @@ app.use('/api', api)
 
 //main api with / path
 app.get('/', (req: Request, res: Response) => {
-  res.json({
+  res.status(200).json({
     Project: 'Udacity first project',
     projectName: 'Image processing',
     author: 'Mahmoud Elebiare',

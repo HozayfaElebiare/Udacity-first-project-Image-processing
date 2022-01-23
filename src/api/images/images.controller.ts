@@ -14,7 +14,7 @@ const imageProcess = async (
 
   // Check file name requested
   if (filename) {
-    const Directory = path.join(__dirname)
+    const Directory = __dirname
     console.log(Directory)
 
     const imagesDir = path.join(Directory, '../../../images/')
@@ -53,7 +53,7 @@ const imageProcess = async (
             console.log('create exported image and return the path')
             await resizeWidth(originalImageDir, imagePath, widthInt)
           } else {
-            console.log('image already exists,just return its path')
+            console.log('image already exists - just return the path')
           }
           res.sendFile(imagePath)
         }
@@ -69,7 +69,7 @@ const imageProcess = async (
             console.log('create exported image and return the path')
             await resizeHeight(originalImageDir, imagePath, heightInt)
           } else {
-            console.log('file already exists,just return its path')
+            console.log('file is already exists - just return the path')
           }
           res.sendFile(imagePath)
         }
@@ -82,7 +82,7 @@ const imageProcess = async (
             `${filename}_width${width}_height${height}.jpg`
           )
           if (!fs.existsSync(imagePath)) {
-            console.log('creating exported image and return its path')
+            console.log('creat exported image - return the path')
             await resizeWidthAndHeight(
               originalImageDir,
               imagePath,
@@ -90,7 +90,7 @@ const imageProcess = async (
               heightInt
             )
           } else {
-            console.log('file already exists,just return its path')
+            console.log('file already exists - just return the path')
           }
           res.sendFile(imagePath)
         }
@@ -104,11 +104,6 @@ const imageProcess = async (
     res.send('file name is not requested')
   }
 }
-
-
-
-
-
 
 /////////////////   Function to help in resizing ///////////   will put in helpers folder
 
