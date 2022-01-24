@@ -1,14 +1,21 @@
 import supertest from 'supertest'
 import app from '../index'
+import imgageController from '../api/images/images.controller'
+import path from 'path'
 
 const request = supertest(app)
 
 describe('--- test images resizer api response ---', () => {
   const trueFile = 'palmtunnel'
+  const trueFile2 = 'icelandwaterfall'
   const fakeFile = 'fakeFile'
   const width = 250
   const height = 350
-
+  const originalImageDir = path.join(__dirname,'../../images/source')
+  const resizedImgsDir = path.join(__dirname,'../../images/exported')
+  console.clear()
+  console.log(originalImageDir)
+  console.log(resizedImgsDir)
   it('0. gets the main endpoint', async () => {
     const response = await request.get('/')
     expect(response.status).toBe(200)
@@ -60,4 +67,23 @@ describe('--- test images resizer api response ---', () => {
     )
     expect(response.status).toBe(200)
   })
+
+  it('8. check function (resizeHeight) ', async () => {
+    expect(await imgageController.resizeHeight(`${originalImageDir}/${trueFile2}.jpg`,`${resizedImgsDir}/${trueFile2}_height${height}.jpg`,height)).toBe(true)
+
+  });
+
+
+  it('9. check function (resizeWidth) ', async () => {
+    expect(await imgageController.resizeWidth(`${originalImageDir}/${trueFile2}.jpg`,`${resizedImgsDir}/${trueFile2}_width${width}.jpg`,width)).toBe(true)
+
+  });
+
+
+  it('10. check function (resizeWidthAndHeight) ', async () => {
+    expect(await imgageController.resizeWidthAndHeight(`${originalImageDir}/${trueFile2}.jpg`,`${resizedImgsDir}/${trueFile2}_width${width}_height${height}.jpg`,width,height)).toBe(true)
+
+  });
+
+
 })
