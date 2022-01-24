@@ -15,15 +15,12 @@ const imageProcess = async (
   // Check file name requested
   if (filename) {
     const Directory = __dirname
-    console.log(Directory)
-
     const imagesDir = path.join(Directory, '../../../images/')
     const originalImageDir = path.join(
       Directory,
       '../../../images/source',
       `${filename}.jpg`
     )
-    console.log(originalImageDir)
 
     // check if file exist
     if (await fs.existsSync(originalImageDir)) {
@@ -51,7 +48,10 @@ const imageProcess = async (
           )
           if (!fs.existsSync(imagePath)) {
             console.log('create exported image and return the path')
-            await resizeWidth(originalImageDir, imagePath, widthInt)
+            if (!await resizeWidth(originalImageDir, imagePath, widthInt)) {
+              res.status(400).send('Error in processing ')
+            }
+            
           } else {
             console.log('image already exists - just return the path')
           }
@@ -67,7 +67,10 @@ const imageProcess = async (
           )
           if (!fs.existsSync(imagePath)) {
             console.log('create exported image and return the path')
-            await resizeHeight(originalImageDir, imagePath, heightInt)
+            if (!await resizeHeight(originalImageDir, imagePath, heightInt)) {
+              res.status(400).send('Error in processing ')
+            }
+            
           } else {
             console.log('file is already exists - just return the path')
           }
@@ -83,12 +86,15 @@ const imageProcess = async (
           )
           if (!fs.existsSync(imagePath)) {
             console.log('creat exported image - return the path')
-            await resizeWidthAndHeight(
+            const condition = await resizeWidthAndHeight(
               originalImageDir,
               imagePath,
               widthInt,
               heightInt
             )
+            if (!condition) {
+              res.status(400).send('Error in processing ')
+            }
           } else {
             console.log('file already exists - just return the path')
           }
@@ -111,9 +117,10 @@ const resizeWidth = async (
   targetPath: string,
   outputPath: string,
   width: number
-): Promise<void> => {
-  const image = sharp(targetPath)
-  await image.metadata().then(function (metadataresutl) {
+): Promise<boolean> => {
+  try {
+    const image = sharp(targetPath)
+  image.metadata().then(function (metadataresutl) {
     return image
       .resize({
         width,
@@ -121,14 +128,23 @@ const resizeWidth = async (
       })
       .toFile(outputPath)
   })
+  return true
+  } catch (error) {
+    console.log('error',error)
+  return false
+  }
+  
 }
+
+
 const resizeHeight = async (
   targetPath: string,
   outputPath: string,
   height: number
-): Promise<void> => {
-  const image = sharp(targetPath)
-  await image.metadata().then(function (metadataresutl) {
+): Promise<boolean> => {
+  try {
+    const image = sharp(targetPath)
+  image.metadata().then(function (metadataresutl) {
     return image
       .resize({
         width: metadataresutl.width,
@@ -136,6 +152,11 @@ const resizeHeight = async (
       })
       .toFile(outputPath)
   })
+  return true
+} catch (error) {
+  console.log('error',error)
+  return false
+}
 }
 
 const resizeWidthAndHeight = async (
@@ -143,13 +164,20 @@ const resizeWidthAndHeight = async (
   outputPath: string,
   width: number,
   height: number
-): Promise<void> => {
-  await sharp(targetPath)
+): Promise<boolean> => {
+  try {
+    await sharp(targetPath)
     .resize({
       width,
       height,
     })
     .toFile(outputPath)
+    return true;
+  } catch (error) {
+    console.log('error',error)
+    return false
+  }
+  
 }
 
 export default imageProcess

@@ -4,11 +4,10 @@
     "description": "udacity project 1 is an image processing api that let users resize and reshape images that saved in our server in save it inside sirverside folder and return this image ",
     "main": "build/index.js",
     "scripts": {
-
         "dev": "nodemon  --exec ts-node ./src/index.ts",
         "build": "npx tsc",
         "start:prod": "npm run build && node build/index.js",
-        "lint": "eslint .",
+        "lint": "eslint . --ext .ts",
         "lint:fix": "eslint --fix",
         "format": "prettier --write './src/index.ts'",
         "jasmine": "jasmine",
@@ -42,18 +41,18 @@
         "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-import": "^2.25.4",
         "eslint-plugin-prettier": "^4.0.0",
+        "jasmine": "^4.0.2",
+        "jasmine-spec-reporter": "^7.0.0",
         "nodemon": "^2.0.15",
         "prettier": "2.5.1",
+        "supertest": "^6.2.2",
         "ts-node": "^10.4.0",
         "typescript": "^4.5.5"
     },
     "dependencies": {
         "dotenv": "^14.2.0",
         "express": "^4.17.2",
-        "jasmine": "^4.0.2",
-        "jasmine-spec-reporter": "^7.0.0",
         "morgan": "^1.10.0",
-        "sharp": "^0.29.3",
-        "supertest": "^6.2.2"
+        "sharp": "^0.29.3"
     }
 }

@@ -5,7 +5,7 @@ const requestLog = (
   _res: express.Response,
   next: express.NextFunction
 ): void => {
-  let RequestedUrl: string = req.url
+  const RequestedUrl: string = req.url
   console.log('new request : ', RequestedUrl)
   next()
 }

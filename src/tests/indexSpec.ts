@@ -4,10 +4,10 @@ import app from '../index'
 const request = supertest(app)
 
 describe('--- test images resizer api response ---', () => {
-  const trueFile: string = 'palmtunnel'
-  const fakeFile: string = 'fakeFile'
-  const width: number = 250
-  const height: number = 350
+  const trueFile = 'palmtunnel'
+  const fakeFile = 'fakeFile'
+  const width = 250
+  const height = 350
 
   it('0. gets the main endpoint', async () => {
     const response = await request.get('/')
