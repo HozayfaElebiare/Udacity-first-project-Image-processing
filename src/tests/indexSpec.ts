@@ -11,8 +11,8 @@ describe('--- test images resizer api response ---', () => {
   const fakeFile = 'fakeFile'
   const width = 250
   const height = 350
-  const originalImageDir = path.join(__dirname,'../../images/source')
-  const resizedImgsDir = path.join(__dirname,'../../images/exported')
+  const originalImageDir = path.join(__dirname, '../../images/source')
+  const resizedImgsDir = path.join(__dirname, '../../images/exported')
   console.clear()
   console.log(originalImageDir)
   console.log(resizedImgsDir)
@@ -69,21 +69,33 @@ describe('--- test images resizer api response ---', () => {
   })
 
   it('8. check function (resizeHeight) ', async () => {
-    expect(await imgageController.resizeHeight(`${originalImageDir}/${trueFile2}.jpg`,`${resizedImgsDir}/${trueFile2}_height${height}.jpg`,height)).toBe(true)
-
-  });
-
+    expect(
+      await imgageController.resizeHeight(
+        `${originalImageDir}/${trueFile2}.jpg`,
+        `${resizedImgsDir}/${trueFile2}_height${height}.jpg`,
+        height
+      )
+    ).toBe(true)
+  })
 
   it('9. check function (resizeWidth) ', async () => {
-    expect(await imgageController.resizeWidth(`${originalImageDir}/${trueFile2}.jpg`,`${resizedImgsDir}/${trueFile2}_width${width}.jpg`,width)).toBe(true)
-
-  });
-
+    expect(
+      await imgageController.resizeWidth(
+        `${originalImageDir}/${trueFile2}.jpg`,
+        `${resizedImgsDir}/${trueFile2}_width${width}.jpg`,
+        width
+      )
+    ).toBe(true)
+  })
 
   it('10. check function (resizeWidthAndHeight) ', async () => {
-    expect(await imgageController.resizeWidthAndHeight(`${originalImageDir}/${trueFile2}.jpg`,`${resizedImgsDir}/${trueFile2}_width${width}_height${height}.jpg`,width,height)).toBe(true)
-
-  });
-
-
+    expect(
+      await imgageController.resizeWidthAndHeight(
+        `${originalImageDir}/${trueFile2}.jpg`,
+        `${resizedImgsDir}/${trueFile2}_width${width}_height${height}.jpg`,
+        width,
+        height
+      )
+    ).toBe(true)
+  })
 })

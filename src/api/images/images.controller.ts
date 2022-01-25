@@ -175,4 +175,4 @@ const resizeWidthAndHeight = async (
   }
 }
 
-export default {imageProcess,resizeWidth,resizeHeight,resizeWidthAndHeight}
+export default { imageProcess, resizeWidth, resizeHeight, resizeWidthAndHeight }
