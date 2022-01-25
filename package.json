@@ -4,7 +4,7 @@
     "description": "udacity project 1 is an image processing api that let users resize and reshape images that saved in our server in save it inside sirverside folder and return this image ",
     "main": "build/index.js",
     "scripts": {
-        "start": "node  --exec ts-node ./src/index.ts",
+        "start": "npm run build && node build/index.js",
         "dev": "nodemon  --exec ts-node ./src/index.ts",
         "build": "npx tsc",
         "start:prod": "npm run build && node build/index.js",
